@@ -27,3 +27,20 @@ print("Случайные инициализирующие веса: ")
 print(synaptic_weights)
 
 # так как веса заданы явно, скрипт не пригоден для использования
+# меняем ситуацию. Используем метод обучения "обратное распространение"
+for p in range(20000):
+    input_layer = test_inputs
+    outputs = sigmoid(np.dot(input_layer, synaptic_weights))
+
+    err = test_outputs - outputs
+    adj = np.dot(input_layer.T, err * (outputs * (1 - outputs)))
+
+    synaptic_weights += adj
+
+print("Веса после обучения:")
+print (synaptic_weights)
+
+print("Результат после обучения:")
+print(outputs)
+
+# Простейший пример нейронки Перцептрон обучена
